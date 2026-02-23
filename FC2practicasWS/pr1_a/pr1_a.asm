@@ -29,19 +29,22 @@
 .text
 .global main
 main:
-	// res -> s0 ; i -> s1 
-	li s0, 0 // res = 0
-	li s1, 0 // i = 0
+	// res -> t0 ; i -> t1 ; N -> t2 ; res(address) -> t3
+	li t0, 0 // res = 0
+	li t1, 0 // i = 0
+	li t2, N // t2 = N 
+
 
 for:
-	bgt s1, N, save
-	add s0, s0, s1
-	addi s1, s1, 1
+	bge t1, t2, save
+	add t0, t0, t1
+	addi t1, t1, 1
 	j for
 
 save:
-	la t0, res		// cargamos la direccion de res
-	sw s0, 0(t0)	// guardamos el nuevo valor de res
+	la t3, res		// cargamos la direccion de res
+	sw t0, 0(t3)	// guardamos el nuevo valor de res
 fin:
 	j fin
+
 .end
