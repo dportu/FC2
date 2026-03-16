@@ -16,6 +16,15 @@
 //rellenar con directivas .extern y .global
 //con las funciones apropiadas
 
+// Funciones externas (del fichero en c)
+.extern _stack
+.extern mul
+.extern i_sqrt
+
+// Funciones globales (funciones en ensamblador a ser llamadas por el archivo en c)
+.global eucl_dist
+.global guardar
+
 //int eucl_dist(int * w, int size);
 eucl_dist:
     //recibo dirección de W en a0, y tamaño N en a1
@@ -26,3 +35,5 @@ eucl_dist:
 guardar:
     //recibo el valor en a0, y la dirección destino en a1
     //asegurarse que sólo se guarda UN BYTE!!
+    sb a0, 0(a1)
+    ret

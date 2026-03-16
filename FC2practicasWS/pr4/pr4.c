@@ -24,9 +24,7 @@ char mayor_u;
 /**
  * Función que guarda un valor en el puntero proporcionado
  */
-void guardar(char valor, char * ubicación) {
-	*ubicación = valor;
-}
+extern void guardar(char valor, char * ubicación); // implementada en ensamblador
 
 /**
  * Función simple que multiplica dos números iterativamente
@@ -59,13 +57,7 @@ int i_sqrt(int a) {
  * Calculamos distancia euclídea. Sumamos todos los cuadrados
  * y terminamos sacando la raíz cuadrada (entera)
  */
-int eucl_dist(int w [], int size) {
-	int acc = 0;
-	for (int i = 0; i < size; i++) {
-		acc += mul(w[i], w[i]);
-	}
-	return i_sqrt(acc);
-}
+extern int eucl_dist(int w [], int size); // implementada en ensamblador
 
 /**
  * Punto de entrada al programa
