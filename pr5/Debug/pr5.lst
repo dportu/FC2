@@ -1,0 +1,606 @@
+
+pr5.elf:     file format elf32-littleriscv
+pr5.elf
+architecture: riscv:rv32, flags 0x00000112:
+EXEC_P, HAS_SYMS, D_PAGED
+start address 0x000001ac
+
+Program Header:
+    LOAD off    0x00001000 vaddr 0x00000000 paddr 0x00000000 align 2**12
+         filesz 0x000001f0 memsz 0x000001f0 flags r-x
+    LOAD off    0x00002000 vaddr 0x00010000 paddr 0x00010000 align 2**12
+         filesz 0x00000064 memsz 0x000000cc flags rw-
+
+Sections:
+Idx Name              Size      VMA       LMA       File off  Algn  Flags
+  0 .text             000001ac  00000000  00000000  00001000  2**2  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .text.main        00000044  000001ac  000001ac  000011ac  2**2  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .data.graph       00000064  00010000  00010000  00002000  2**2  CONTENTS, ALLOC, LOAD, DATA
+  3 .bss.z            00000064  00010064  00010064  00002064  2**2  ALLOC
+  4 .sbss.paths       00000004  000100c8  000100c8  00002064  2**2  ALLOC
+  5 .riscv.attributes 00000021  00000000  00000000  00002064  2**0  CONTENTS, READONLY
+  6 .comment          00000012  00000000  00000000  00002085  2**0  CONTENTS, READONLY
+  7 .debug_line       0000031a  00000000  00000000  00002097  2**0  CONTENTS, READONLY, DEBUGGING, OCTETS
+  8 .debug_info       000000ba  00000000  00000000  000023b1  2**0  CONTENTS, READONLY, DEBUGGING, OCTETS
+  9 .debug_abbrev     00000091  00000000  00000000  0000246b  2**0  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 10 .debug_aranges    00000040  00000000  00000000  00002500  2**3  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 11 .debug_str        00002403  00000000  00000000  00002540  2**0  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 12 .debug_ranges     00000010  00000000  00000000  00004943  2**0  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 13 .debug_macro      00000711  00000000  00000000  00004953  2**0  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 14 .debug_frame      0000002c  00000000  00000000  00005064  2**2  CONTENTS, READONLY, DEBUGGING, OCTETS
+SYMBOL TABLE:
+00000000 l    d  .text	00000000 .text
+000001ac l    d  .text.main	00000000 .text.main
+00010000 l    d  .data.graph	00000000 .data.graph
+00010064 l    d  .bss.z	00000000 .bss.z
+000100c8 l    d  .sbss.paths	00000000 .sbss.paths
+00000000 l    d  .riscv.attributes	00000000 .riscv.attributes
+00000000 l    d  .comment	00000000 .comment
+00000000 l    d  .debug_line	00000000 .debug_line
+00000000 l    d  .debug_info	00000000 .debug_info
+00000000 l    d  .debug_abbrev	00000000 .debug_abbrev
+00000000 l    d  .debug_aranges	00000000 .debug_aranges
+00000000 l    d  .debug_str	00000000 .debug_str
+00000000 l    d  .debug_ranges	00000000 .debug_ranges
+00000000 l    d  .debug_macro	00000000 .debug_macro
+00000000 l    d  .debug_frame	00000000 .debug_frame
+00000000 l    df *ABS*	00000000 ./fun_asm.o
+00000000 l       .text	00000000 matrixCopy
+00000004 l       .text	00000000 for1
+0000003c l       .text	00000000 efor1
+0000000c l       .text	00000000 for2
+00000034 l       .text	00000000 efor2
+00000040 l       .text	00000000 matrixMul
+00000044 l       .text	00000000 for3
+000000b8 l       .text	00000000 efor3
+0000004c l       .text	00000000 for4
+000000b0 l       .text	00000000 efor4
+00000068 l       .text	00000000 for5
+000000a4 l       .text	00000000 efor5
+00000100 l       .text	00000000 for6
+00000144 l       .text	00000000 efor6
+00000108 l       .text	00000000 for7
+0000013c l       .text	00000000 efor7
+0000011c l       .text	00000000 if
+0000012c l       .text	00000000 else
+00000134 l       .text	00000000 eif
+00000148 l       .text	00000000 for8
+00000178 l       .text	00000000 efor8
+00000000 l    df *ABS*	00000000 pr5.c
+000000bc g       .text	00000000 matrixPow
+00010064 g     O .bss.z	00000064 z
+00010000 g     O .data.graph	00000064 graph
+000001ac g     F .text.main	00000044 main
+000100c8 g     O .sbss.paths	00000004 paths
+00020000 g       *ABS*	00000000 _stack
+
+
+
+Disassembly of section .text:
+
+00000000 <matrixCopy>:
+matrixCopy():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:24
+matrixCopy: // PRIMERA FUNCION
+
+//en a0 la dimension de n
+//a1 contiene la direcion de x[0][0]
+//a2 contiene la direccio de z[0][0]
+	li t0, 0 // i = 0
+   0:	00000293          	li	t0,0
+
+00000004 <for1>:
+for1():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:28
+
+for1://(int i = 0; i < n; i++)
+
+	bge t0, a0, efor1 // salta a efor1 cuando i >= que N
+   4:	02a2dc63          	bge	t0,a0,3c <efor1>
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:29
+	li t1, 0 // j = 0
+   8:	00000313          	li	t1,0
+
+0000000c <for2>:
+for2():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:33
+
+for2://	(int j = 0; j < n ; j ++)
+
+	bge t1, a0, efor2 // salta a efor2 cuando j >= que N
+   c:	02a35463          	bge	t1,a0,34 <efor2>
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:37
+
+	// dir(m[i][j])= dir(m) + (i*N+j)*4
+
+	mul t2, t0, a0 // t2 = i*N
+  10:	02a283b3          	mul	t2,t0,a0
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:38
+	add t2, t2, t1 // t2 = (i*N+j)
+  14:	006383b3          	add	t2,t2,t1
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:39
+	slli t2, t2, 2 //t2 (i*N+j)*4
+  18:	00239393          	slli	t2,t2,0x2
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:40
+	add t3, t2, a1 // dir(x[i][j])= dir(m) + (i*N+j)*4 -> direccion de x[i][j] en t3
+  1c:	00b38e33          	add	t3,t2,a1
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:41
+	add t4, t2, a2 //dir(z[i][j]) = dir(m) + (i*N+j)*4 -> direccion de z[i][j] en t4
+  20:	00c38eb3          	add	t4,t2,a2
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:43
+
+	lw t3, 0(t3) // en t3 guardo el valor de x[i][j]
+  24:	000e2e03          	lw	t3,0(t3)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:44
+	sw t3, 0(t4) // en la direccion de memoria de t4(z[i][j]) guardo el valor de x[i][j]
+  28:	01cea023          	sw	t3,0(t4)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:46
+
+	addi t1, t1, 1 // j++
+  2c:	00130313          	addi	t1,t1,1
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:47
+	j for2
+  30:	fddff06f          	j	c <for2>
+
+00000034 <efor2>:
+efor2():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:50
+
+efor2:
+	addi t0, t0, 1 //i++
+  34:	00128293          	addi	t0,t0,1
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:51
+	j for1
+  38:	fcdff06f          	j	4 <for1>
+
+0000003c <efor1>:
+efor1():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:54
+
+efor1:
+	ret
+  3c:	00008067          	ret
+
+00000040 <matrixMul>:
+matrixMul():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:63
+// en a0 la dimension de n
+//a1 contiene la direcion de x[0][0]
+//a2 contiene la direccio de y[0][0]
+//a3 contiene la direccion de z[0][0]
+
+	li t0, 0 // i = 0
+  40:	00000293          	li	t0,0
+
+00000044 <for3>:
+for3():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:67
+
+for3: // (int i = 0; i < n; i++) -> primer for de la segunda funcion
+
+	bge t0, a0, efor3 // salta a efor3 cuando i >= n
+  44:	06a2da63          	bge	t0,a0,b8 <efor3>
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:68
+	li t1, 0 // j = 0
+  48:	00000313          	li	t1,0
+
+0000004c <for4>:
+for4():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:72
+
+for4: // (int j = 0; j < n ; j ++)
+
+	bge t1, a0, efor4    // salta a efor4 cuando j >= n
+  4c:	06a35263          	bge	t1,a0,b0 <efor4>
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:75
+
+	// dir(z[i][j])= dir(m) + (i*N+j)*4
+	mul t2, t0, a0 // t2 = i*N
+  50:	02a283b3          	mul	t2,t0,a0
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:76
+	add t2, t2, t1 // t2 = (i*N+j)
+  54:	006383b3          	add	t2,t2,t1
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:77
+	slli t2, t2, 2 //t2 (i*N+j)*4
+  58:	00239393          	slli	t2,t2,0x2
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:78
+	add t3, t2, a3 //dir(z[i][j]) = dir(m) + (i*N+j)*4 -> direccion de z[i][j] en t3
+  5c:	00d38e33          	add	t3,t2,a3
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:80
+
+	li t4, 0 // para ir guardando el valor de z[i][j]
+  60:	00000e93          	li	t4,0
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:81
+	li t5, 0 // k = 0
+  64:	00000f13          	li	t5,0
+
+00000068 <for5>:
+for5():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:85
+
+for5: // (int k = 0; k < n ; k ++)
+
+	bge t5, a0, efor5 // salta a efor5 cuadno k >= n
+  68:	02af5e63          	bge	t5,a0,a4 <efor5>
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:88
+
+	// dir(m[i][j])= dir(m) + (i*N+k)*4
+	mul t2, t0, a0 // t2 = i*N
+  6c:	02a283b3          	mul	t2,t0,a0
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:89
+	add t2, t2, t5 // t2 = (i*N+k)
+  70:	01e383b3          	add	t2,t2,t5
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:90
+	slli t2, t2, 2 //t2 (i*N+k)*4
+  74:	00239393          	slli	t2,t2,0x2
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:91
+	add t2, t2, a1 //dir(x[i][k]) = dir(m) + (i*N+k)*4 -> direccion de z[i][j] en t2
+  78:	00b383b3          	add	t2,t2,a1
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:93
+
+	lw t2, 0(t2) // en t2 se pone el valor de x[i][k]
+  7c:	0003a383          	lw	t2,0(t2)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:96
+
+	// dir(m[k][j])= dir(m) + (k*N+j)*4
+	mul t6, t5, a0 // t6 = k*N
+  80:	02af0fb3          	mul	t6,t5,a0
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:97
+	add t6, t6, t1 // t6 = (k*N+j)
+  84:	006f8fb3          	add	t6,t6,t1
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:98
+	slli t6, t6, 2 //t6 (k*N+j)*4
+  88:	002f9f93          	slli	t6,t6,0x2
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:99
+	add t6, t6, a2 //
+  8c:	00cf8fb3          	add	t6,t6,a2
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:101
+
+	lw t6, 0(t6)// en t6 se pone el valor de y[k][j]
+  90:	000faf83          	lw	t6,0(t6)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:106
+
+	//en t2 se pone el valor de x[i][k]
+	//en t6 se pone el valor de y[k][j]
+
+	mul t6, t2, t6 // (x[i][k])*(y[k][j])
+  94:	03f38fb3          	mul	t6,t2,t6
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:107
+	add t4, t4, t6 // (z[i][j])= (z[i][j]) + ( (x[i][k])*(y[k][j]) )
+  98:	01fe8eb3          	add	t4,t4,t6
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:108
+	addi t5, t5,1  // k++
+  9c:	001f0f13          	addi	t5,t5,1
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:109
+	j for5
+  a0:	fc9ff06f          	j	68 <for5>
+
+000000a4 <efor5>:
+efor5():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:112
+
+efor5:
+	sw t4, 0(t3) // guardamos el resultado
+  a4:	01de2023          	sw	t4,0(t3)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:113
+	addi t1, t1, 1 // j++
+  a8:	00130313          	addi	t1,t1,1
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:114
+	j for4
+  ac:	fa1ff06f          	j	4c <for4>
+
+000000b0 <efor4>:
+efor4():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:117
+
+efor4:
+	addi t0, t0, 1 // i++
+  b0:	00128293          	addi	t0,t0,1
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:118
+	j for3
+  b4:	f91ff06f          	j	44 <for3>
+
+000000b8 <efor3>:
+efor3():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:121
+efor3:
+
+	ret
+  b8:	00008067          	ret
+
+000000bc <matrixPow>:
+matrixPow():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:133
+//a1 contiene la direcion de x[0][0]
+//en a2 se guarda al valor al que esta elevado
+//a3 contiene la direccion de z[0][0]
+
+	//prologo
+	addi sp, sp, -32
+  bc:	fe010113          	addi	sp,sp,-32
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:134
+	sw ra, 0(sp) // almacena la direccion de retorno
+  c0:	00112023          	sw	ra,0(sp)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:135
+	sw s1, 4(sp) // en s1 -> j
+  c4:	00912223          	sw	s1,4(sp)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:136
+	sw s2, 8(sp) // en s2 -> k
+  c8:	01212423          	sw	s2,8(sp)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:137
+	sw s3, 12(sp)// en s3 -> i
+  cc:	01312623          	sw	s3,12(sp)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:138
+	sw s4, 16(sp)// en s4 -> n y para calcular el tamaño de la matriz en memoria
+  d0:	01412823          	sw	s4,16(sp)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:139
+	sw s5, 20(sp)// en s5 -> e
+  d4:	01512a23          	sw	s5,20(sp)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:140
+	sw s6, 24(sp)// dir (x[0][0])
+  d8:	01612c23          	sw	s6,24(sp)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:141
+	sw s7, 28(sp)// dir(z[0][0])
+  dc:	01712e23          	sw	s7,28(sp)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:144
+
+	// calcular el espacio que tenemos que reservar -> n*n*tamaño del dato
+	mul s4,a0 ,a0 // en s4 -> tam de la matriz aux
+  e0:	02a50a33          	mul	s4,a0,a0
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:145
+	slli s4, s4, 2 // direcciones necesarias en la pila
+  e4:	002a1a13          	slli	s4,s4,0x2
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:147
+
+	sub sp, sp , s4 // movemos la pila
+  e8:	41410133          	sub	sp,sp,s4
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:149
+
+	mv s4, a0 // en s4 -> ponemos el valor de n
+  ec:	00050a13          	mv	s4,a0
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:150
+	mv s5, a2 // en s5 -> ponemos el valor de e
+  f0:	00060a93          	mv	s5,a2
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:151
+	mv s6, a1 // en s6 -> ponemos la direccion de x[0][0]
+  f4:	00058b13          	mv	s6,a1
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:152
+	mv s7, a3 // en s7 -> ponemos la direccion de z[0][0]
+  f8:	00068b93          	mv	s7,a3
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:154
+
+	li s1, 0 // j = 0
+  fc:	00000493          	li	s1,0
+
+00000100 <for6>:
+for6():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:157
+
+for6:
+	bge s1, s4, efor6 // saltamoa a efor6 si j >= n
+ 100:	0544d263          	bge	s1,s4,144 <efor6>
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:158
+	li s2, 0 // k = 0
+ 104:	00000913          	li	s2,0
+
+00000108 <for7>:
+for7():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:161
+
+for7:
+	bge s2, s4, efor7
+ 108:	03495a63          	bge	s2,s4,13c <efor7>
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:164
+
+	// dir(z[j][k])= dir(m) + (j*N+k)*4
+	mul t0, s1, s4 // en t0 -> j*N
+ 10c:	034482b3          	mul	t0,s1,s4
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:165
+	add t0, t0, s2 // en t0 -> j*N + k
+ 110:	012282b3          	add	t0,t0,s2
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:166
+	slli t0, t0, 2 // en t0 -> (j*N + k)*4
+ 114:	00229293          	slli	t0,t0,0x2
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:167
+	add t0, t0, s7 // //dir(z[j][k]) = dir(m) + (j*N+k)*4 -> direccion de z[j][k] en t0
+ 118:	017282b3          	add	t0,t0,s7
+
+0000011c <if>:
+if():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:170
+
+if:
+	bne s1, s2, else // salrta a else si j!=k
+ 11c:	01249863          	bne	s1,s2,12c <else>
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:171
+	li t1, 1
+ 120:	00100313          	li	t1,1
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:172
+	sw t1, 0(t0)
+ 124:	0062a023          	sw	t1,0(t0)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:174
+
+	j eif
+ 128:	00c0006f          	j	134 <eif>
+
+0000012c <else>:
+else():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:177
+
+else:
+	li t1, 0
+ 12c:	00000313          	li	t1,0
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:178
+	sw t1, 0(t0)
+ 130:	0062a023          	sw	t1,0(t0)
+
+00000134 <eif>:
+eif():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:181
+
+eif:
+	addi s2, s2, 1 // k++
+ 134:	00190913          	addi	s2,s2,1
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:182
+	j for7
+ 138:	fd1ff06f          	j	108 <for7>
+
+0000013c <efor7>:
+efor7():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:185
+
+efor7:
+	addi s1, s1, 1 // j++
+ 13c:	00148493          	addi	s1,s1,1
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:186
+	j for6
+ 140:	fc1ff06f          	j	100 <for6>
+
+00000144 <efor6>:
+efor6():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:189
+
+efor6:
+	li s3, 1 // i = 1
+ 144:	00100993          	li	s3,1
+
+00000148 <for8>:
+for8():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:193
+
+
+for8: //(int i = i ; i < n ; i ++)-> el tercer for sirve para llamar a las otras dos funciones
+	blt s5, s3, efor8 // salta efor8 si i > e
+ 148:	033ac863          	blt	s5,s3,178 <efor8>
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:200
+	//PARA MATRIXMUL (n, x, z, aux):
+// en a0 la dimension de n
+// a1 contiene la direcion de x[0][0]
+// a2 contiene la direcion de z [0][0]
+// a3 sera sp, la direccion de la amtriz aux
+	mv a0, s4
+ 14c:	000a0513          	mv	a0,s4
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:201
+	mv a1, s6 // en a1 -> dir(x[0][0])
+ 150:	000b0593          	mv	a1,s6
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:202
+	mv a2, s7 // en a2 -> dir(z[0][0])
+ 154:	000b8613          	mv	a2,s7
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:203
+	mv a3, sp
+ 158:	00010693          	mv	a3,sp
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:205
+
+	call matrixMul
+ 15c:	ee5ff0ef          	jal	ra,40 <matrixMul>
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:211
+
+	//PARA MATRIXCOPY (n, aux, z):
+// en a0 la dimension de n
+// a1 sera sp, la direccion de la amtriz aux
+// a2 contiene la direcion de z [0][0]
+	mv a0, s4
+ 160:	000a0513          	mv	a0,s4
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:212
+	mv a1, sp
+ 164:	00010593          	mv	a1,sp
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:213
+	mv a2, s7 // en a2 -> dir(z[0][0])
+ 168:	000b8613          	mv	a2,s7
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:214
+	call matrixCopy
+ 16c:	e95ff0ef          	jal	ra,0 <matrixCopy>
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:216
+
+	addi s3, s3, 1 // i++
+ 170:	00198993          	addi	s3,s3,1
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:217
+	j for8
+ 174:	fd5ff06f          	j	148 <for8>
+
+00000178 <efor8>:
+efor8():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:222
+
+efor8:
+
+// calcular el espacio que tenemos que reservar -> n*n*tamaño del dato
+	mul s4, a0, a0
+ 178:	02a50a33          	mul	s4,a0,a0
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:223
+	slli s4, s4, 2
+ 17c:	002a1a13          	slli	s4,s4,0x2
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:225
+
+	add sp, sp, s4
+ 180:	01410133          	add	sp,sp,s4
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:228
+
+	// epilogo
+	lw ra, 0(sp) // almacena la direccion de retorno
+ 184:	00012083          	lw	ra,0(sp)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:229
+	lw s1, 4(sp) // en s1 -> j
+ 188:	00412483          	lw	s1,4(sp)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:230
+	lw s2, 8(sp) // en s2 -> k
+ 18c:	00812903          	lw	s2,8(sp)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:231
+	lw s3, 12(sp)// en s3 -> i
+ 190:	00c12983          	lw	s3,12(sp)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:232
+	lw s4, 16(sp)// en s4 -> n y para calcular el tamaño de la matriz en memoria
+ 194:	01012a03          	lw	s4,16(sp)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:233
+	lw s5, 20(sp)// en s5 -> e
+ 198:	01412a83          	lw	s5,20(sp)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:234
+	lw s6, 24(sp)// dir (x[0][0])
+ 19c:	01812b03          	lw	s6,24(sp)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:235
+	lw s7, 28(sp)// dir(z[0][0])
+ 1a0:	01c12b83          	lw	s7,28(sp)
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:236
+	addi sp, sp, 32
+ 1a4:	02010113          	addi	sp,sp,32
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../fun_asm.asm:238
+
+	ret
+ 1a8:	00008067          	ret
+
+Disassembly of section .text.main:
+
+000001ac <main>:
+main():
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../pr5.c:33
+    {0, 0, 0, 1, 1}
+};
+int z[N][N];        //matriz resultado del algoritmo
+int paths;
+
+void main() {
+ 1ac:	ff010113          	addi	sp,sp,-16
+ 1b0:	00112623          	sw	ra,12(sp)
+ 1b4:	00812423          	sw	s0,8(sp)
+ 1b8:	01010413          	addi	s0,sp,16
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../pr5.c:35
+
+    matrixPow(N, graph, STEPS, z);
+ 1bc:	000107b7          	lui	a5,0x10
+ 1c0:	06478693          	addi	a3,a5,100 # 10064 <z>
+ 1c4:	00300613          	li	a2,3
+ 1c8:	000107b7          	lui	a5,0x10
+ 1cc:	00078593          	mv	a1,a5
+ 1d0:	00500513          	li	a0,5
+ 1d4:	ee9ff0ef          	jal	ra,bc <matrixPow>
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../pr5.c:36
+    paths = z[ORG][DST];
+ 1d8:	000107b7          	lui	a5,0x10
+ 1dc:	06478793          	addi	a5,a5,100 # 10064 <z>
+ 1e0:	00c7a703          	lw	a4,12(a5)
+ 1e4:	000107b7          	lui	a5,0x10
+ 1e8:	0ce7a423          	sw	a4,200(a5) # 100c8 <paths>
+C:\EclipseRV\FC2practicasWS\FC2practicasWS\pr5\Debug/../pr5.c:38 (discriminator 1)
+
+	while(1);
+ 1ec:	0000006f          	j	1ec <main+0x40>
